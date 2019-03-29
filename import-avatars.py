@@ -41,6 +41,7 @@ for f in all_files:
 print("Importing avatars...")
 with db.transaction() as tx:
     for avatar in avatars:
+        # Preserve existing avatars
         tx.query("""
 UPDATE `forums_users`
 SET `avatar_file` = :avatar_file
@@ -48,4 +49,10 @@ WHERE `id` = :user_id;""",
             avatar_file=f"{avatar['name']}{avatar['ext']}",
             user_id=avatar['name']
         )
+
+        # Set a default avatar for accounts that lack one
+        tx.query("""
+UPDATE `forums_users`
+SET `avatar_file` = 'bim-default.jpg'
+WHERE `avatar_file` IS NULL;""")
     print("Successfully imported avatars")
