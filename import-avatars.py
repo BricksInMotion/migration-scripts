@@ -35,7 +35,6 @@ for f in all_files:
             "ext": ext
         })
 
-
 # Insert the avatars into the database
 # using a transaction, of course, to ensure everything works
 print("Importing avatars...")

@@ -24,7 +24,6 @@ conn_str = "mysql+pymysql://{}:{}@{}/{}".format(
 )
 db = records.Database(conn_str)
 
-
 with db.transaction() as tx:
     # Start by getting the newest post ID
     newest_post_id = tx.query("""
@@ -36,7 +35,8 @@ SELECT MAX(forums_posts.id) AS `newest_post_id` FROM `forums_posts`;
     orphaned_topics = tx.query("""
 SELECT `id`, `posted`
 FROM `forums_topics`
-WHERE `first_post_id` = 0;
+WHERE `first_post_id` = 0 AND
+`subject` NOT LIKE 'Trailer - %';
     """)
 
     for topic in orphaned_topics:
@@ -55,7 +55,7 @@ INSERT INTO `forums_posts` (
 `id`, `poster`, `poster_id`, `poster_ip`, `message`, `posted`, `topic_id`
 ) VALUES (
     :id, :poster, :poster_id, :poster_ip, :message, :posted, :topic_id
-)
+);
         """,
         id=newest_post_id,
         poster=OP_USER_NAME,
