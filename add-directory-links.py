@@ -30,7 +30,7 @@ with db.transaction() as tx:
         AND ft.film_id IS NOT NULL  /* this must be a film, not a trailer or normal topic */
         AND ft.id < 26111  /* don't get topics with link in it already */
         AND ft.first_post_id = fp.id  /* only get op */
-        AND fp.poster_id != 140674  /* take out Mouldy */
+        AND fp.poster_id != 141084  /* take out Mouldy */
     ORDER BY fp.id DESC  /* newest films first */
     LIMIT 1000;  /* there's over 9000 rows, only do 1000 at a time */
         """)

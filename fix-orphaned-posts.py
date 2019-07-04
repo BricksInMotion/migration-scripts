@@ -8,7 +8,7 @@ DB_HOST = ""
 DB_DBNAME = ""
 
 # Define the user details used for making new OPs
-OP_USER_ID = 140674
+OP_USER_ID = 141084
 OP_USER_NAME = "Mouldy [BOT]"
 OP_USER_IP = '127.0.0.1'
 OP_USER_MSG = "[b]This post has been deleted.[/b]"
