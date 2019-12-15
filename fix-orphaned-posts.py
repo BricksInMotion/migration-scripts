@@ -68,7 +68,6 @@ INSERT INTO `forums_posts` (
 
         # Finally, we go back to the original topic and
         # set the OP ID column to our newly fabricated OP
-        print("Associating new OP with topic...")
         tx.query("""
 UPDATE `forums_topics`
 SET `first_post_id` = :first_post_id
@@ -76,5 +75,6 @@ WHERE `id` = :id;""",
             first_post_id=newest_post_id,
             id=topic.id
         )
+        print("Associating new OP with topic...")
 
     print("Successfully created new OPs for orphaned topics")
