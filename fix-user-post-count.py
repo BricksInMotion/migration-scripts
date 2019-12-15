@@ -55,7 +55,9 @@ with db.transaction() as tx:
         tx.query("""
         UPDATE `forums_users`
         SET `num_posts` = 0
-        WHERE `id` = :poster_id
+        WHERE
+            `id` = :poster_id
+            AND `id` NOT IN (777, 132232)
         """,
         poster_id=person.id)
 
